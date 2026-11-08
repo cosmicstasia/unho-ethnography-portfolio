@@ -1,0 +1,54 @@
+---
+import type { Turn } from '../data/interviews';
+
+interface Props {
+  turns: Turn[];
+  interviewer: string;
+  participant: string;
+}
+const { turns, interviewer, participant } = Astro.props;
+const spoken = turns.filter((t) => 's' in t).length;
+---
+
+<details class="group rounded-lg border border-surface0 bg-mantle">
+  <summary
+    class="cursor-pointer list-none px-4 py-3 font-sans text-sm font-semibold text-text marker:hidden hover:bg-surface0/50 [&::-webkit-details-marker]:hidden"
+  >
+    <span class="mr-2 inline-block text-overlay1 transition-transform group-open:rotate-90" aria-hidden="true">▸</span>
+    Full transcript <span class="font-normal text-subtext0">({spoken} turns)</span>
+  </summary>
+  <div class="border-t border-surface0 px-4 py-4">
+    <p class="mb-4 font-sans text-xs text-subtext0">
+      <span class="font-semibold text-sapphire">{interviewer}</span> is the interviewer.{' '}
+      <span class="font-semibold text-peach">{participant}</span> is the participant.
+    </p>
+    <ol class="space-y-3">
+      {
+        turns.map((turn) =>
+          'note' in turn ? (
+            <li class="my-6 border-y border-dashed border-surface1 py-2 font-sans text-xs text-subtext0 italic">
+              {turn.note}
+            </li>
+          ) : (
+            <li
+              class:list={[
+                'grid gap-x-4 sm:grid-cols-[9rem_1fr]',
+                turn.s === 'P' && 'rounded bg-surface0/40 py-1',
+              ]}
+            >
+              <span
+                class:list={[
+                  'font-sans text-sm font-semibold sm:pl-2',
+                  turn.s === 'I' ? 'text-sapphire' : 'text-peach',
+                ]}
+              >
+                {turn.s === 'I' ? interviewer : participant}:
+              </span>
+              <p class:list={['sm:pr-2', turn.s === 'I' ? 'text-subtext1' : 'text-text']}>{turn.t}</p>
+            </li>
+          ),
+        )
+      }
+    </ol>
+  </div>
+</details>

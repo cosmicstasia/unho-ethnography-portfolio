@@ -1,0 +1,67 @@
+---
+import type { EmpathyMap } from '../data/interviews';
+
+interface Props {
+  map: EmpathyMap | null;
+  label: string;
+  researcher: string;
+}
+const { map, label, researcher } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const src = map ? base + map.image : '';
+
+const quadrants = map
+  ? [
+      { name: 'Says', items: map.says, kind: 'stated', color: 'text-blue' },
+      { name: 'Does', items: map.does, kind: 'stated', color: 'text-green' },
+      { name: 'Thinks', items: map.thinks, kind: 'inferred', color: 'text-mauve' },
+      { name: 'Feels', items: map.feels, kind: 'inferred', color: 'text-peach' },
+    ]
+  : [];
+---
+
+{
+  map ? (
+    <figure class="space-y-4">
+      <a href={src} class="block" title="Open full-size image">
+        <img
+          src={src}
+          alt={map.imageAlt}
+          loading="lazy"
+          class="w-full rounded-lg border border-surface1 bg-white"
+        />
+      </a>
+      <figcaption class="font-sans text-xs text-subtext0">
+        Empathy map for {label}, made by {researcher}. Participant names on the map have been covered with the
+        P-label. Click the image to open it full size.
+      </figcaption>
+      <div class="grid gap-3 sm:grid-cols-2">
+        {quadrants.map((q) => (
+          <section class="rounded-lg border border-surface0 bg-mantle p-4">
+            <h5 class="flex items-baseline justify-between gap-2 font-sans">
+              <span class:list={['font-semibold', q.color]}>{q.name}</span>
+              <span class="rounded bg-surface0 px-2 py-0.5 text-[0.7rem] text-subtext1">
+                {q.kind === 'stated' ? 'Stated / observed' : 'Inferred by our team'}
+              </span>
+            </h5>
+            <ul class="mt-2 list-disc space-y-1 pl-5 text-sm">
+              {q.items.map((i) => (
+                <li>{i}</li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+      <p class="font-sans text-xs text-subtext0">
+        <strong class="text-subtext1">Says</strong> and <strong class="text-subtext1">Does</strong> come from what
+        the participant told us. <strong class="text-subtext1">Thinks</strong> and
+        <strong class="text-subtext1">Feels</strong> are our team’s interpretation.
+      </p>
+    </figure>
+  ) : (
+    <div class="rounded-lg border border-dashed border-yellow/60 bg-mantle p-4 font-sans text-sm text-subtext1">
+      <p class="font-semibold text-yellow">Empathy map in progress</p>
+      <p class="mt-1">{researcher} is finishing the empathy map for {label}. It will be added here.</p>
+    </div>
+  )
+}
