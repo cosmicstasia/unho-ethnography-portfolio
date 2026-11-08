@@ -56,12 +56,19 @@
 
 <svelte:window onkeydown={onKey} />
 
-<div class="relative font-sans" bind:this={root}>
+<div
+  class="relative font-sans"
+  bind:this={root}
+  onfocusout={(e) => {
+    // Close when keyboard focus leaves the switcher.
+    if (open && !root.contains(e.relatedTarget as Node | null)) open = false;
+  }}
+>
   <button
     type="button"
     class="flex w-full items-center gap-2.5 rounded-md border border-line bg-raised px-2.5 py-1.5 text-left text-sm text-fg transition-colors hover:border-line-strong"
     aria-expanded={open}
-    aria-controls={`themes-${uid}`}
+    aria-controls={open ? `themes-${uid}` : undefined}
     onclick={() => (open = !open)}
   >
     <span class="flex shrink-0 -space-x-1" aria-hidden="true">

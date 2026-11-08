@@ -1,14 +1,19 @@
 Our team interviewed five people connected to engineering at UT: a female engineering faculty member, a male engineering graduate TA, two female engineering students, and a male aerospace engineering student. To protect their privacy, we refer to them as P1 through P5.
 
-| Participant | Role | Researcher |
-| :-: | :-- | :-- |
-| P1 | Female engineering faculty member who teaches a large first-year course | Emma Waggenspack |
-| P2 | Male aerospace engineering student | Anastasia Coffman |
-| P3 | Female first-year aerospace engineering student (EF 151) | Janice Lo |
-| P4 | Female engineering student who is considering changing majors | Ella Black |
-| P5 | Male biomedical engineering graduate student who works as a lab TA | Channing Brown |
+<div class="table-scroll" tabindex="0" role="region" aria-label="Participants and researchers">
+<table>
+<thead><tr><th scope="col">Participant</th><th scope="col">Role</th><th scope="col">Researcher</th></tr></thead>
+<tbody>
+<tr><td>P1</td><td>Female engineering faculty member who teaches a large first-year course</td><td>Emma Waggenspack</td></tr>
+<tr><td>P2</td><td>Male aerospace engineering student</td><td>Anastasia Coffman</td></tr>
+<tr><td>P3</td><td>Female first-year aerospace engineering student (EF 151)</td><td>Janice Lo</td></tr>
+<tr><td>P4</td><td>Female engineering student who is considering changing majors</td><td>Ella Black</td></tr>
+<tr><td>P5</td><td>Male biomedical engineering graduate student who works as a lab TA</td><td>Channing Brown</td></tr>
+</tbody>
+</table>
+</div>
 
-### Recurring Themes
+#### Recurring Themes
 
 The theme that came up the most was that women feel like they have to prove they belong in engineering. P4 said she feels she has to "overperform above the average in order to prove that I belong." P3 told us female students often won't answer in class because a wrong answer might look like proof they shouldn't be there, and that women feel like "I have to be perfect within this field." P2 hasn't seen this himself, but he's heard from friends that women are "pushed to prove themselves a little bit more than men are." P1 deals with a version of it as a professor, since students have shown up on the first day surprised she wasn't a man.
 
@@ -20,7 +25,7 @@ Fourth, people kept tying their success to someone who supported them. P1 got in
 
 Last, nobody described open discrimination. The bias they talked about was mostly assumptions. P1 said "people do just make assumptions," like the time a team decided the only woman in the group should do the painting and decorating. P4 said she sometimes feels "underestimated or not listened to," but added that "it doesn't always happen."
 
-### Differences and Contradictions
+#### Differences and Contradictions
 
 The biggest disagreement was over whether a professor's gender matters. P1 thinks it does, because female students seem more comfortable with her and a female instructor makes women in engineering feel more normal. P3 thinks it affects how professors are perceived, but said class size changes participation more. P4 hasn't noticed any difference in how men and women teach, but she has noticed there are "significantly more male professors" in her STEM classes.
 
@@ -32,7 +37,7 @@ Even so, both P1 and P5 said representation matters. P5 said seeing women workin
 
 Participants also had different stories about staying in engineering. P4 is considering leaving, and gender is "part of the reason," along with doubts about whether she would enjoy the career. P3 talked about pushing past failure until "people will stop knowing the you that failed." P1 left her first PhD program after a bad experience and only stayed in the field because her old mentor brought her into his new program.
 
-### Stakeholder Needs and Perspectives
+#### Stakeholder Needs and Perspectives
 
 Female engineering students need a place where mistakes don't count against them. They want to be heard without having to overperform first, and they value having other women around who understand what they're going through. P4 also mentioned being more cautious walking around campus alone, which reminded us that safety is part of their experience too.
 
@@ -40,7 +45,7 @@ Faculty and TAs are the ones dealing with these dynamics. P1 said she "fairly co
 
 Male students and TAs seem to care about fairness, but they aren't very aware of the problem. Both of our male participants were unsure about how gender affects engineering classes. P2 and P3 also both came from rural high schools with few advanced classes, so for some students the jump to UT is a challenge on its own, separate from gender.
 
-### Emerging Insights
+#### Emerging Insights
 
 We went into this project assuming female professors would directly make women participate more. The interviews only partly backed that up. None of the students noticed a difference in how male and female professors teach. Instead, female faculty seemed to matter in two other ways. P1's stories show that a female instructor may be more likely to notice and stop biased team dynamics, like the decorating assignment. P5's point about female TAs shows that representation works as a signal that women can succeed in engineering.
 
@@ -50,7 +55,7 @@ Another surprise was how different our participants' exposure to female faculty 
 
 Finally, P4 showed us that leaving engineering usually has more than one cause. Gender bias adds to other doubts, like whether the career is a good fit, instead of being the only reason. That makes our first research question about retention more complicated than we thought.
 
-### Unanswered Questions
+#### Unanswered Questions
 
 Most of our student participants are first-years, so we still don't know whether students who have mostly had male professors feel differently. Interviewing upperclassmen would help with that. We also still need data on how many women leave engineering at UT and when, which our research plan asked for.
 

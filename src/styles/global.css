@@ -53,6 +53,8 @@
   h1, h2, h3, h4, h5 {
     @apply text-strong;
     text-wrap: balance;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
   p, li, dd { text-wrap: pretty; }
   a {
@@ -85,13 +87,14 @@
 .table-plain tbody tr:last-child td { @apply border-b-0; }
 
 /* Long-form narrative text pulled from markdown files */
-.prose-narrative { @apply max-w-[68ch]; }
+.prose-narrative { @apply max-w-[60ch]; }
 .prose-narrative > p { @apply my-5; }
 .prose-narrative > p:first-of-type::first-letter {
   @apply float-left mt-1.5 mr-2 font-serif text-[3.4rem] leading-[0.8] font-semibold text-accent;
 }
-.prose-narrative h3 { @apply mt-12 mb-3 font-serif text-[1.35rem] font-semibold leading-snug; }
-.prose-narrative table { @apply my-8 w-full border-collapse font-sans text-[0.9rem] leading-snug; }
+.prose-narrative h4 { @apply mt-12 mb-3 font-serif text-[1.35rem] font-semibold leading-snug; }
+.prose-narrative .table-scroll { @apply my-8 overflow-x-auto; }
+.prose-narrative table { @apply w-full min-w-[30rem] border-collapse font-sans text-[0.9rem] leading-snug; }
 .prose-narrative th { @apply border-b border-line-strong px-3 py-2.5 text-left text-xs font-bold tracking-wide text-muted; }
 .prose-narrative td { @apply border-b border-line px-3 py-3 align-top; }
 .prose-narrative td:first-child { @apply font-semibold text-orange; }

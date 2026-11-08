@@ -4,7 +4,7 @@
 //   bun scripts/gen-themes.ts [/usr/share/omarchy/themes]
 //
 // Every text color is checked against the theme's backgrounds and pulled toward
-// the foreground until it reaches WCAG AA (4.5:1), so all themes stay readable.
+// the foreground until it clears WCAG AA (4.5:1) with a small margin, so all themes stay readable.
 
 import { readdirSync, existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -31,9 +31,10 @@ const contrast = (a: RGB, b: RGB) => {
 };
 
 // Move `c` toward `toward` until it clears `min` against every background.
-const readable = (c: RGB, bgs: RGB[], toward: RGB, min = 4.5): RGB => {
+// The check runs on the rounded hex value, with a small margin over AA's 4.5:1.
+const readable = (c: RGB, bgs: RGB[], toward: RGB, min = 4.6): RGB => {
   for (let t = 0; t <= 1; t += 0.02) {
-    const m = mix(c, toward, t);
+    const m = hex(toHex(mix(c, toward, t)));
     if (bgs.every((b) => contrast(m, b) >= min)) return m;
   }
   return toward;
@@ -60,7 +61,7 @@ for (const slug of readdirSync(dir).sort()) {
 
   const sunken = hex(p.dark_background ?? toHex(mix(bg, fg, 0.04)));
   const deep = hex(p.darker_background ?? toHex(mix(bg, fg, 0.08)));
-  const raised = light ? mix(bg, white, 0.65) : mix(bg, fg, 0.05);
+  const raised = hex(toHex(light ? mix(bg, white, 0.65) : mix(bg, fg, 0.05)));
   const surfaces = [bg, sunken, raised];
 
   const pick = (...keys: string[]) => hex(keys.map((k) => p[k]).find(Boolean) ?? p.accent);

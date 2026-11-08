@@ -22,7 +22,7 @@ const quadrants = map
 
 {
   map ? (
-    <figure>
+    <figure class="@container">
       <a
         href={src}
         class="group block overflow-hidden rounded-lg border border-line bg-white p-2 shadow-[0_8px_24px_-12px_rgb(0_0_0/0.35)]"
@@ -41,16 +41,9 @@ const quadrants = map
         to open it full size.
       </figcaption>
 
-      <div class="mt-6 grid overflow-hidden rounded-lg border border-line sm:grid-cols-2">
-        {quadrants.map((q, i) => (
-          <section
-            class:list={[
-              'bg-sunken p-4 sm:p-5',
-              i % 2 === 0 && 'sm:border-r sm:border-line',
-              i < 2 && 'sm:border-b sm:border-line',
-              i > 0 && 'border-t border-line sm:border-t-0',
-            ]}
-          >
+      <div class="mt-6 grid grid-cols-[repeat(auto-fit,minmax(min(100%,17rem),1fr))] gap-px overflow-hidden rounded-lg border border-line bg-line">
+        {quadrants.map((q) => (
+          <section class="bg-sunken p-4 sm:p-5">
             <h5 class="flex items-center gap-2 font-sans text-sm">
               <span class:list={['size-2 rounded-full', q.dot]} aria-hidden="true" />
               <span class:list={['font-bold', q.text]}>{q.name}</span>

@@ -191,7 +191,7 @@ export const interviews: Interview[] = [
       { s: 'I', t: 'Okay. Yeah, that makes sense. Um, okay, I think that’s all the questions I have. Uh, I really appreciate your time, and thank you so much.' },
     ],
     map: {
-      image: '/maps/p2-empathy-map.png',
+      image: '/maps/p2-empathy-map.webp',
       imageAlt: 'Empathy map for P2 with four quadrants: Says, Thinks, Does, and Feels. The full text is listed below the image.',
       says: [
         '“There wasn’t a lot of opportunity until I got into UT, and now there’s so much that it feels almost overwhelming.”',
@@ -257,7 +257,7 @@ export const interviews: Interview[] = [
       { s: 'I', t: 'Wow! Thank you so much for doing our interview as a EF 151 student. Your insight will be very precious to our research. So thank you again!' },
     ],
     map: {
-      image: '/maps/p3-empathy-map.png',
+      image: '/maps/p3-empathy-map.webp',
       imageAlt: 'Empathy map for P3 made by Janice Lo, with four quadrants: Says, Thinks, Does, and Feels. The full text is listed below the image.',
       says: [
         '“a lot more male students being opening to speaking”',
@@ -367,7 +367,7 @@ export const interviews: Interview[] = [
       { s: 'P', t: 'Thank you.' },
     ],
     map: {
-      image: '/maps/p5-empathy-map.png',
+      image: '/maps/p5-empathy-map.webp',
       imageAlt: 'Empathy map for P5 made by Channing Brown, with four quadrants: Says, Thinks, Does, and Feels. The full text is listed below the image.',
       says: [
         '“I love my job as a TA”',
