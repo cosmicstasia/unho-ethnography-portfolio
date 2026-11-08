@@ -50,7 +50,7 @@
           href={`#${item.id}`}
           onclick={() => (open = false)}
           aria-current={active === item.id ? 'location' : undefined}
-          class="block rounded-md px-2.5 py-1.5 no-underline transition-colors {active === item.id
+          class="flex min-h-11 items-center rounded-md px-2.5 py-1.5 no-underline transition-colors lg:min-h-0 {active === item.id
             ? 'bg-raised font-bold text-strong'
             : inside(item)
               ? 'font-bold text-strong hover:bg-raised/60'
@@ -66,7 +66,7 @@
                   href={`#${child.id}`}
                   onclick={() => (open = false)}
                   aria-current={active === child.id ? 'location' : undefined}
-                  class="block rounded px-2 py-1 text-[0.84rem] no-underline transition-colors {active === child.id
+                  class="flex min-h-11 items-center rounded px-2 py-1 text-[0.84rem] no-underline transition-colors lg:min-h-0 {active === child.id
                     ? 'bg-raised text-accent'
                     : 'text-muted hover:text-strong'}"
                 >
@@ -90,7 +90,7 @@
     </div>
     <button
       type="button"
-      class="flex shrink-0 items-center gap-1.5 rounded-md border border-line bg-raised px-2.5 py-1.5 font-sans text-sm text-fg hover:border-line-strong"
+      class="flex min-h-11 shrink-0 items-center gap-1.5 rounded-md border border-line bg-raised px-3 font-sans text-sm whitespace-nowrap text-fg hover:border-line-strong"
       aria-expanded={open}
       aria-controls="toc-mobile"
       onclick={() => (open = !open)}
@@ -102,7 +102,7 @@
           <path d="M2.5 4h11M2.5 8h11M2.5 12h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
         {/if}
       </svg>
-      <span class="sr-only sm:not-sr-only">{open ? 'Close' : 'Contents'}</span>
+      <span>{open ? 'Close' : 'Contents'}</span>
     </button>
   </div>
   {#if open}

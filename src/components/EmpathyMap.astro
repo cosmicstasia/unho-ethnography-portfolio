@@ -25,14 +25,16 @@ const quadrants = map
     <figure class="@container">
       <a
         href={src}
-        class="group block overflow-hidden rounded-lg border border-line bg-white p-2 shadow-[0_8px_24px_-12px_rgb(0_0_0/0.35)]"
+        class="group block overflow-hidden rounded-lg border border-line bg-white p-2 shadow-[0_8px_24px_-12px_color-mix(in_oklab,var(--c-fg)_35%,transparent)]"
       >
         <img
           src={src}
           alt={map.imageAlt}
+          width={map.width}
+          height={map.height}
           loading="lazy"
           decoding="async"
-          class="w-full rounded transition-transform duration-500 ease-out-expo group-hover:scale-[1.01]"
+          class="h-auto w-full rounded transition-transform duration-500 ease-out-expo group-hover:scale-[1.01] motion-reduce:transform-none motion-reduce:transition-none"
         />
         <span class="sr-only">Open full-size image</span>
       </a>

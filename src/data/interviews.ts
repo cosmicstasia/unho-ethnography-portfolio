@@ -7,6 +7,8 @@ export type Turn = { s: 'I' | 'P'; t: string } | { note: string };
 export type EmpathyMap = {
   image: string;
   imageAlt: string;
+  width: number;
+  height: number;
   says: string[];
   thinks: string[];
   does: string[];
@@ -193,6 +195,8 @@ export const interviews: Interview[] = [
     map: {
       image: '/maps/p2-empathy-map.webp',
       imageAlt: 'Empathy map for P2 with four quadrants: Says, Thinks, Does, and Feels. The full text is listed below the image.',
+      width: 2188,
+      height: 1844,
       says: [
         '“There wasn’t a lot of opportunity until I got into UT, and now there’s so much that it feels almost overwhelming.”',
         '“In labs you probably see a bit more participation than in the lectures.”',
@@ -259,6 +263,8 @@ export const interviews: Interview[] = [
     map: {
       image: '/maps/p3-empathy-map.webp',
       imageAlt: 'Empathy map for P3 made by Janice Lo, with four quadrants: Says, Thinks, Does, and Feels. The full text is listed below the image.',
+      width: 3000,
+      height: 1688,
       says: [
         '“a lot more male students being opening to speaking”',
         '“students are a lot more comfortable discussing it with each other”',
@@ -369,6 +375,8 @@ export const interviews: Interview[] = [
     map: {
       image: '/maps/p5-empathy-map.webp',
       imageAlt: 'Empathy map for P5 made by Channing Brown, with four quadrants: Says, Thinks, Does, and Feels. The full text is listed below the image.',
+      width: 3000,
+      height: 1688,
       says: [
         '“I love my job as a TA”',
         '“The relationship between students and TAs is more casual”',

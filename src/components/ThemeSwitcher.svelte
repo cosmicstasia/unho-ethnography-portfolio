@@ -66,7 +66,7 @@
 >
   <button
     type="button"
-    class="flex w-full items-center gap-2.5 rounded-md border border-line bg-raised px-2.5 py-1.5 text-left text-sm text-fg transition-colors hover:border-line-strong"
+    class="flex min-h-11 w-full items-center gap-2.5 rounded-md border border-line bg-raised px-2.5 py-1.5 text-left text-sm text-fg transition-colors hover:border-line-strong"
     aria-expanded={open}
     aria-controls={open ? `themes-${uid}` : undefined}
     onclick={() => (open = !open)}
@@ -85,7 +85,7 @@
   {#if open}
     <div
       id={`themes-${uid}`}
-      class="absolute z-40 max-h-[min(70vh,32rem)] w-64 overflow-y-auto rounded-lg border border-line-strong bg-raised p-1.5 shadow-[0_12px_32px_-8px_rgb(0_0_0/0.45)] {align === 'up'
+      class="absolute z-40 max-h-[min(70vh,32rem)] w-64 overflow-y-auto rounded-lg border border-line-strong bg-raised p-1.5 shadow-[0_12px_32px_-8px_color-mix(in_oklab,var(--c-fg)_40%,transparent)] {align === 'up'
         ? 'bottom-full left-0 mb-2'
         : 'top-full right-0 mt-2'}"
     >
@@ -94,7 +94,7 @@
           <legend class="px-2 pt-1.5 pb-1 text-xs font-bold tracking-wide text-muted">{g.label}</legend>
           {#each g.items as t}
             <label
-              class="flex cursor-pointer items-center gap-2.5 rounded-md px-2 py-1.5 text-sm has-checked:bg-sunken has-checked:text-strong hover:bg-sunken/70 has-focus-visible:outline-2 has-focus-visible:outline-accent"
+              class="flex min-h-11 cursor-pointer items-center gap-2.5 rounded-md px-2 py-1.5 text-sm has-checked:bg-sunken has-checked:text-strong hover:bg-sunken/70 has-focus-visible:outline-2 has-focus-visible:outline-accent"
             >
               <input
                 type="radio"

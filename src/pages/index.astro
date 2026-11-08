@@ -12,6 +12,7 @@ import { Content as EvidenceAnalysis } from '../content/evidence-analysis.md';
 
 const team = ['Emma Waggenspack', 'Ella Black', 'Anastasia Coffman', 'Janice Lo', 'Channing Brown'];
 const base = import.meta.env.BASE_URL;
+const assetBase = base.endsWith('/') ? base : `${base}/`;
 const themeIds = themes.map((t) => t.id);
 
 const toc = [
@@ -58,38 +59,32 @@ const h4 = 'font-sans text-[0.8rem] font-bold tracking-wide text-muted';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline define:vars={{ themeIds }}>
       // A ?theme= link wins, then the visitor's saved choice. Unknown ids are ignored.
+      // With neither, follow the system light or dark setting.
       let t = new URLSearchParams(location.search).get('theme');
       try {
         if (themeIds.includes(t)) localStorage.setItem('portfolio-theme', t);
         else t = localStorage.getItem('portfolio-theme');
       } catch {}
+      if (!themeIds.includes(t) && matchMedia('(prefers-color-scheme: light)').matches) {
+        t = 'catppuccin-latte';
+      }
       if (themeIds.includes(t)) document.documentElement.dataset.theme = t;
     </script>
-    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="icon" type="image/svg+xml" href={`${assetBase}favicon.svg`} />
     <title>Women in Engineering at UTK | Ethnography Portfolio</title>
     <meta
       name="description"
       content="UNHO 207 ethnographic evidence and sensemaking portfolio by team Three is a Magic Number: UN SDG 5, women in engineering at UTK."
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..600&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
-    <a
-      href="#main"
-      class="sr-only z-50 rounded-md bg-accent px-3 py-2 font-sans text-bg no-underline focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
-      >Skip to content</a
-    >
+    <a href="#main" class="skip-link">Skip to content</a>
     <div class="lg:grid lg:grid-cols-[17.5rem_minmax(0,1fr)]">
       <aside class="sticky top-0 z-30 lg:h-screen lg:self-start">
         <Toc client:load items={toc} />
       </aside>
 
-      <main id="main" class="@container mx-auto w-full max-w-[60rem] px-5 pb-28 sm:px-10 lg:px-14">
+      <main id="main" tabindex="-1" class="@container mx-auto w-full max-w-[60rem] px-5 pb-28 sm:px-10 lg:px-14">
         <!-- Title area -->
         <header id="top" class="pt-12 pb-14 sm:pt-20">
           <h1 class="font-serif text-[2.6rem] leading-[1.05] font-semibold tracking-[-0.02em] sm:text-[3.75rem]">
@@ -467,6 +462,7 @@ const h4 = 'font-sans text-[0.8rem] font-bold tracking-wide text-muted';
                   <div>
                     <a href={e.url} target="_blank" rel="noopener" class="font-serif leading-snug font-semibold">
                       {e.artifact}
+                      <span class="sr-only"> (opens in a new tab)</span>
                     </a>
                     <p class="mt-1 font-sans text-xs leading-snug text-muted">{e.source}</p>
                   </div>
@@ -494,6 +490,7 @@ const h4 = 'font-sans text-[0.8rem] font-bold tracking-wide text-muted';
                   <Fragment set:html={italics(r.text)} />{' '}
                   <a href={r.url} target="_blank" rel="noopener" class="break-all">
                     {r.url}
+                    <span class="sr-only"> (opens in a new tab)</span>
                   </a>
                 </li>
               ))
