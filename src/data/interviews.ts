@@ -320,7 +320,28 @@ export const interviews: Interview[] = [
       { s: 'I', t: 'Any other comments?' },
       { s: 'P', t: 'Being a woman in STEM can be challenging, but it is also worth it. It’s nice to see a growth of women in STEM as the years have gone by.' },
     ],
-    map: null,
+    map: {
+      image: '/maps/p4-empathy-map.webp',
+      imageAlt: 'Empathy map for P4 made by Ella Black, with four quadrants: Says, Thinks, Does, and Feels. The full text is listed below the image.',
+      width: 1536,
+      height: 1024,
+      says: [
+        '“I have considered leaving engineering”',
+        'Underestimated or not listened to as much due to being a woman in engineering',
+        'Significantly more male professors for my STEM classes than female ones',
+      ],
+      thinks: [
+        'Women in male dominated classes tend to stick together',
+        'Being a women in STEM is worth it',
+        'Its frustrating being underestimated based on gender',
+      ],
+      does: [
+        'Considers changing majors',
+        'Sticks together with other women in male dominated fields',
+        'Actively be more cautious due to gender',
+      ],
+      feels: ['The need to over perform to be taken seriously', 'Sometimes unwelcome', 'Underestimated'],
+    },
   },
   {
     id: 'p5',
