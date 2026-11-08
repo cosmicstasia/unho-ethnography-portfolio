@@ -92,7 +92,7 @@ export const interviews: Interview[] = [
       { s: 'I', t: 'That is all of my questions. Thank you so much.' },
       { s: 'P', t: 'Are you an engineer or no?' },
       { s: 'I', t: 'No, no.' },
-      { note: 'End of formal interview. The conversation below continued after the formal questions. Speaker labels were added from context.' },
+      { note: 'The formal interview ended here. The conversation below kept going after the formal questions, and we added the speaker labels from context.' },
       { s: 'P', t: 'Wow. You know, just, people always say, you know, get used to that, like, oh, well, they’re always surprised. But I’m always surprised. Still. And I was like, yeah, and he’s like, well, do you find that, like, the boys in your class are just naturally, like, better at thinking of things than girls? Like, he asked me that. And I was like, no, I mean, I was like, no, no, I really don’t find that. But also, like, what a weird question. I just told you I was the professor of this class and you’re like, do you think boys are better at that thing? I’m like, no, I don’t think that. But it’s just like, that you ask that, it’s strange. You know, just that’s like out in the public, you know, the reactions that people...' },
       { s: 'I', t: 'Yes, and always the surprise.' },
       { s: 'P', t: 'Whenever people say, and I, you know, I don’t know, I’m not a man, but I just don’t feel like they’d get that same reaction.' },
@@ -282,7 +282,7 @@ export const interviews: Interview[] = [
     label: 'P4',
     role: 'Female engineering student who is considering changing majors',
     researcher: 'Ella Black',
-    format: 'Written interview. The participant typed answers to the questions below.',
+    format: 'Written interview. P4 typed answers to the questions below.',
     questions: [
       'What made you get into engineering?',
       'Have you considered leaving an engineering major?',

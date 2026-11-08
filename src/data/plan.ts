@@ -45,11 +45,11 @@ export const original: string[][] = [
 export const updated: string[][] = [
   [
     'How do the biases against women in engineering contribute to the retention of women in the engineering program at UTK?',
-    'What experiences with bias, if any, women in UTK engineering have had, and whether those experiences make them think about leaving the major.',
+    'We need to know what experiences with bias, if any, women in UTK engineering have had, and whether those experiences make them think about leaving the major.',
     'It lets us understand the different experiences of women in engineering, and whether bias is one of the reasons women leave.',
-    'Interviews with female engineering students and a female engineering faculty member. Public Tickle College of Engineering reports and Women in Engineering program pages.',
+    'We interviewed female engineering students and a female engineering faculty member, and we looked at public Tickle College of Engineering reports and Women in Engineering program pages.',
     'Female engineering students, female engineering faculty, and male engineering students for comparison.',
-    'Interview transcripts about experiences in engineering classes and thoughts about staying or leaving. Enrollment and retention numbers by gender from college reports.',
+    'We need interview transcripts about experiences in engineering classes and thoughts about staying or leaving, plus enrollment and retention numbers by gender from college reports.',
     'We get informed consent before recording. We refer to participants as P1 to P5, remove names from transcripts and empathy maps, and do not publish audio.',
     'Consent of collecting data; Research question bias (we ask open questions that do not assume bias happened)',
     'Ethnographic interviews (P1, P3, P4); artifact and document collection',
@@ -57,12 +57,12 @@ export const updated: string[][] = [
   ],
   [
     'How does seeing female engineering faculty impact gender roles in engineering?',
-    'Whether having female engineering faculty changes how students participate in class and who they think belongs in engineering.',
+    'We need to know whether having female engineering faculty changes how students participate in class and who they think belongs in engineering.',
     'It shows the impact of representation for female engineering students and how it affects the number of women going into and staying in engineering.',
-    'Interviews with a female faculty member, a graduate TA, and male and female students. National faculty data from the Society of Women Engineers.',
+    'We interviewed a female faculty member, a graduate TA, and male and female students. We also used national faculty data from the Society of Women Engineers.',
     'Female and male engineering students, female engineering faculty, and engineering TAs.',
-    'Interview accounts of participation with male and female instructors. Numbers of women on engineering faculty.',
-    'Same consent and confidentiality steps as above. Questions stay professional and neutral.',
+    'We need interview accounts of how students participate with male and female instructors, and numbers of women on engineering faculty.',
+    'We used the same consent and confidentiality steps as above, and we kept our questions professional and neutral.',
     'Female bias (we included male participants and asked about gender “if at all” so we did not lead answers)',
     'Ethnographic interviews (P1, P2, P3, P5); artifact and document collection',
     'Students had little to compare. P2 has only had female engineering professors and P5 has never had one. UT does not post its faculty numbers by gender.',
@@ -79,7 +79,7 @@ export const feedbackResponses: { feedback: string; response: string }[] = [
   {
     feedback: 'Consider whether interviews may be more useful than observations.',
     response:
-      'We agreed. We dropped observation and online surveys and did five ethnographic interviews instead. For our second method we used artifact and document collection, which also let us look for the enrollment and retention numbers our plan asked for.',
+      'We agreed, so we dropped observation and online surveys and did five ethnographic interviews instead. For our second method we used artifact and document collection, which also let us look for the enrollment and retention numbers our plan asked for.',
   },
   {
     feedback: 'Be intentional about whose perspectives you include.',
@@ -118,8 +118,8 @@ export const alignment: { rq: string; method: string; evidence: string[] }[] = [
     rq: 'RQ1: Bias and retention',
     method: 'Artifact and document collection',
     evidence: [
-      'Annual report: women are 25% of undergraduates, but there is no public retention data by gender.',
-      '2022 ASEE paper by UT faculty and staff: women leave partly because of a lack of mentoring and social support.',
+      'The annual report says women are 25% of undergraduates, but UT does not publish retention data by gender.',
+      'A 2022 ASEE paper by UT faculty and staff says women leave partly because of a lack of mentoring and social support.',
     ],
   },
   {
@@ -127,7 +127,7 @@ export const alignment: { rq: string; method: string; evidence: string[] }[] = [
     method: 'Interviews',
     evidence: [
       'P1 has had students surprised she was not a man, and thinks a female instructor normalizes women in engineering.',
-      'P2 and P3 have had mostly female engineering professors; P5 has had none.',
+      'P2 and P3 have had mostly female engineering professors, while P5 has never had one.',
       'P5 says female TAs show students “that there are successful women in this field.”',
     ],
   },
@@ -135,7 +135,7 @@ export const alignment: { rq: string; method: string; evidence: string[] }[] = [
     rq: 'RQ2: Female faculty and gender roles',
     method: 'Artifact and document collection',
     evidence: [
-      'Society of Women Engineers: about 1 in 5 U.S. engineering faculty are women, and aerospace has the lowest share.',
+      'The Society of Women Engineers reports that about 1 in 5 U.S. engineering faculty are women, and aerospace has the lowest share.',
     ],
   },
 ];
