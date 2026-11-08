@@ -1,0 +1,278 @@
+[
+  {
+    "id": "catppuccin",
+    "name": "Catppuccin",
+    "mode": "dark",
+    "swatches": [
+      "#1e1e2e",
+      "#89b4fa",
+      "#f6b6ab",
+      "#a6e3a1",
+      "#f5c2e7"
+    ]
+  },
+  {
+    "id": "catppuccin-latte",
+    "name": "Catppuccin Latte",
+    "mode": "light",
+    "swatches": [
+      "#eff1f5",
+      "#2b60ce",
+      "#9d4e45",
+      "#476e51",
+      "#785a84"
+    ]
+  },
+  {
+    "id": "ethereal",
+    "name": "Ethereal",
+    "mode": "dark",
+    "swatches": [
+      "#060b1e",
+      "#7d82d9",
+      "#eb8b54",
+      "#92a593",
+      "#c89dc1"
+    ]
+  },
+  {
+    "id": "everforest",
+    "name": "Everforest",
+    "mode": "dark",
+    "swatches": [
+      "#2d353b",
+      "#7fbbb3",
+      "#e09d7f",
+      "#a7c080",
+      "#d699b6"
+    ]
+  },
+  {
+    "id": "flexoki-light",
+    "name": "Flexoki Light",
+    "mode": "light",
+    "swatches": [
+      "#fffcf0",
+      "#205ea6",
+      "#9e5c24",
+      "#63702c",
+      "#a84d7c"
+    ]
+  },
+  {
+    "id": "gruvbox",
+    "name": "Gruvbox",
+    "mode": "dark",
+    "swatches": [
+      "#282828",
+      "#7daea3",
+      "#e1875c",
+      "#a9b665",
+      "#d3869b"
+    ]
+  },
+  {
+    "id": "hackerman",
+    "name": "Hackerman",
+    "mode": "dark",
+    "swatches": [
+      "#0b0c16",
+      "#82fb9c",
+      "#50f7a3",
+      "#4fe88f",
+      "#86a7df"
+    ]
+  },
+  {
+    "id": "jade-horse",
+    "name": "Jade Horse",
+    "mode": "dark",
+    "swatches": [
+      "#142620",
+      "#8bcbb1",
+      "#d2ab8d",
+      "#8bcbb1",
+      "#b7a1c8"
+    ]
+  },
+  {
+    "id": "kanagawa",
+    "name": "Kanagawa",
+    "mode": "dark",
+    "swatches": [
+      "#1f1f28",
+      "#dcd7ba",
+      "#c47d64",
+      "#7c986f",
+      "#9b86b8"
+    ]
+  },
+  {
+    "id": "last-horizon",
+    "name": "Last Horizon",
+    "mode": "dark",
+    "swatches": [
+      "#0c0b0c",
+      "#b59790",
+      "#887e8e",
+      "#87a9b0",
+      "#c4d8e2"
+    ]
+  },
+  {
+    "id": "lumon",
+    "name": "Lumon",
+    "mode": "dark",
+    "swatches": [
+      "#16242d",
+      "#8bc9eb",
+      "#8bc9eb",
+      "#6398be",
+      "#8bc9eb"
+    ]
+  },
+  {
+    "id": "lupine",
+    "name": "Lupine",
+    "mode": "light",
+    "swatches": [
+      "#fafafa",
+      "#3160df",
+      "#0469cf",
+      "#4a2fd0",
+      "#8849d3"
+    ]
+  },
+  {
+    "id": "matte-black",
+    "name": "Matte Black",
+    "mode": "dark",
+    "swatches": [
+      "#121212",
+      "#e68e0d",
+      "#c36969",
+      "#ffc107",
+      "#d35f5f"
+    ]
+  },
+  {
+    "id": "miasma",
+    "name": "Miasma",
+    "mode": "dark",
+    "swatches": [
+      "#222222",
+      "#8e9569",
+      "#a48c72",
+      "#7d9977",
+      "#bc8557"
+    ]
+  },
+  {
+    "id": "nord",
+    "name": "Nord",
+    "mode": "dark",
+    "swatches": [
+      "#2e3440",
+      "#8daac7",
+      "#d5997e",
+      "#a3be8c",
+      "#bb9eb9"
+    ]
+  },
+  {
+    "id": "retro-82",
+    "name": "Retro 82",
+    "mode": "dark",
+    "swatches": [
+      "#05182e",
+      "#faa968",
+      "#faa968",
+      "#339596",
+      "#4a948c"
+    ]
+  },
+  {
+    "id": "ristretto",
+    "name": "Ristretto",
+    "mode": "dark",
+    "swatches": [
+      "#2c2525",
+      "#f38d70",
+      "#fb9a77",
+      "#adda78",
+      "#a8a9eb"
+    ]
+  },
+  {
+    "id": "rose-pine",
+    "name": "Rose Pine",
+    "mode": "light",
+    "swatches": [
+      "#faf4ed",
+      "#576a87",
+      "#7d616e",
+      "#286983",
+      "#6e628c"
+    ]
+  },
+  {
+    "id": "solitude",
+    "name": "Solitude",
+    "mode": "dark",
+    "swatches": [
+      "#101315",
+      "#7e868a",
+      "#c9c2b4",
+      "#9fa5a9",
+      "#aeaeae"
+    ]
+  },
+  {
+    "id": "starship",
+    "name": "Starship",
+    "mode": "dark",
+    "swatches": [
+      "#1c1c1e",
+      "#ff9f0a",
+      "#ff6a3d",
+      "#ff9f0a",
+      "#ff8fa3"
+    ]
+  },
+  {
+    "id": "tokyo-night",
+    "name": "Tokyo Night",
+    "mode": "dark",
+    "swatches": [
+      "#1a1b26",
+      "#7aa2f7",
+      "#eb927b",
+      "#9ece6a",
+      "#ad8ee6"
+    ]
+  },
+  {
+    "id": "vantablack",
+    "name": "Vantablack",
+    "mode": "dark",
+    "swatches": [
+      "#000000",
+      "#8d8d8d",
+      "#b9b9b9",
+      "#b6b6b6",
+      "#9b9b9b"
+    ]
+  },
+  {
+    "id": "white",
+    "name": "White",
+    "mode": "light",
+    "swatches": [
+      "#ffffff",
+      "#6e6e6e",
+      "#4a4a4a",
+      "#3a3a3a",
+      "#2e2e2e"
+    ]
+  }
+]

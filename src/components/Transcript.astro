@@ -8,43 +8,64 @@ interface Props {
 }
 const { turns, interviewer, participant } = Astro.props;
 const spoken = turns.filter((t) => 's' in t).length;
+const first = interviewer.split(' ')[0];
 ---
 
-<details class="group rounded-lg border border-surface0 bg-mantle">
+<details class="group rounded-lg border border-line bg-sunken">
   <summary
-    class="cursor-pointer list-none px-4 py-3 font-sans text-sm font-semibold text-text marker:hidden hover:bg-surface0/50 [&::-webkit-details-marker]:hidden"
+    class="flex cursor-pointer list-none items-center gap-3 rounded-lg px-4 py-3 font-sans text-sm text-fg transition-colors hover:bg-raised/60 [&::-webkit-details-marker]:hidden"
   >
-    <span class="mr-2 inline-block text-overlay1 transition-transform group-open:rotate-90" aria-hidden="true">▸</span>
-    Full transcript <span class="font-normal text-subtext0">({spoken} turns)</span>
+    <svg
+      class="size-4 shrink-0 text-muted transition-transform duration-200 group-open:rotate-90"
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+    <span class="font-bold text-strong">
+      <span class="group-open:hidden">Read the full transcript</span>
+      <span class="hidden group-open:inline">Hide transcript</span>
+    </span>
+    <span class="ml-auto text-xs text-muted">{spoken} turns</span>
   </summary>
-  <div class="border-t border-surface0 px-4 py-4">
-    <p class="mb-4 font-sans text-xs text-subtext0">
-      <span class="font-semibold text-sapphire">{interviewer}</span> is the interviewer.{' '}
-      <span class="font-semibold text-peach">{participant}</span> is the participant.
+
+  <div class="border-t border-line px-3 py-5 sm:px-5">
+    <p class="mb-5 flex flex-wrap items-center gap-x-4 gap-y-1 font-sans text-xs text-muted">
+      <span class="inline-flex items-center gap-1.5">
+        <span class="size-2 rounded-full bg-cyan" aria-hidden="true"></span>
+        <span><span class="font-bold text-cyan">{first}</span> = interviewer ({interviewer})</span>
+      </span>
+      <span class="inline-flex items-center gap-1.5">
+        <span class="size-2 rounded-full bg-orange" aria-hidden="true"></span>
+        <span><span class="font-bold text-orange">{participant}</span> = participant</span>
+      </span>
     </p>
-    <ol class="space-y-3">
+    <ol class="space-y-1.5">
       {
         turns.map((turn) =>
           'note' in turn ? (
-            <li class="my-6 border-y border-dashed border-surface1 py-2 font-sans text-xs text-subtext0 italic">
-              {turn.note}
+            <li class="my-6 flex items-center gap-3 font-sans text-xs text-muted italic">
+              <span class="h-px flex-1 bg-line" aria-hidden="true" />
+              <span class="max-w-[48ch] text-center">{turn.note}</span>
+              <span class="h-px flex-1 bg-line" aria-hidden="true" />
             </li>
           ) : (
             <li
               class:list={[
-                'grid gap-x-4 sm:grid-cols-[9rem_1fr]',
-                turn.s === 'P' && 'rounded bg-surface0/40 py-1',
+                'grid gap-x-4 gap-y-0.5 rounded-md px-3 py-2 sm:grid-cols-[5.5rem_minmax(0,1fr)]',
+                turn.s === 'P' && 'bg-raised',
               ]}
             >
               <span
                 class:list={[
-                  'font-sans text-sm font-semibold sm:pl-2',
-                  turn.s === 'I' ? 'text-sapphire' : 'text-peach',
+                  'pt-[0.2rem] font-sans text-xs font-bold tracking-wide',
+                  turn.s === 'I' ? 'text-cyan' : 'text-orange',
                 ]}
               >
-                {turn.s === 'I' ? interviewer : participant}:
+                {turn.s === 'I' ? first : participant}
               </span>
-              <p class:list={['sm:pr-2', turn.s === 'I' ? 'text-subtext1' : 'text-text']}>{turn.t}</p>
+              <p class:list={['max-w-[68ch]', turn.s === 'I' ? 'text-soft' : 'text-fg']}>{turn.t}</p>
             </li>
           ),
         )

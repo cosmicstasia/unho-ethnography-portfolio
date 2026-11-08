@@ -1,59 +1,97 @@
 @import "tailwindcss";
+@import "./themes.css";
 
-/* Catppuccin Mocha palette */
+/* Semantic color tokens. Values come from the active Omarchy theme (themes.css). */
 @theme {
-  --color-crust: #11111b;
-  --color-mantle: #181825;
-  --color-base: #1e1e2e;
-  --color-surface0: #313244;
-  --color-surface1: #45475a;
-  --color-surface2: #585b70;
-  --color-overlay0: #6c7086;
-  --color-overlay1: #7f849c;
-  --color-subtext0: #a6adc8;
-  --color-subtext1: #bac2de;
-  --color-text: #cdd6f4;
-  --color-lavender: #b4befe;
-  --color-blue: #89b4fa;
-  --color-sapphire: #74c7ec;
-  --color-teal: #94e2d5;
-  --color-green: #a6e3a1;
-  --color-yellow: #f9e2af;
-  --color-peach: #fab387;
-  --color-red: #f38ba8;
-  --color-mauve: #cba6f7;
-  --color-pink: #f5c2e7;
+  --color-bg: var(--c-bg);
+  --color-sunken: var(--c-sunken);
+  --color-deep: var(--c-deep);
+  --color-raised: var(--c-raised);
+  --color-line: var(--c-line);
+  --color-line-strong: var(--c-line-strong);
+  --color-fg: var(--c-fg);
+  --color-strong: var(--c-strong);
+  --color-soft: var(--c-soft);
+  --color-muted: var(--c-muted);
+  --color-accent: var(--c-accent);
+  --color-blue: var(--c-blue);
+  --color-cyan: var(--c-cyan);
+  --color-green: var(--c-green);
+  --color-yellow: var(--c-yellow);
+  --color-orange: var(--c-orange);
+  --color-red: var(--c-red);
+  --color-magenta: var(--c-magenta);
 
   --font-serif: "Source Serif 4", Charter, "Iowan Old Style", Georgia, serif;
-  --font-sans: "Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @layer base {
   html {
-    color-scheme: dark;
     scroll-behavior: smooth;
-    scroll-padding-top: 4.5rem;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+    scrollbar-color: var(--c-line-strong) var(--c-bg);
   }
   @media (min-width: 64rem) {
-    html { scroll-padding-top: 1.5rem; }
+    html { scroll-padding-top: 2rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
   }
   body {
-    @apply bg-base text-text font-serif leading-relaxed;
+    @apply bg-bg font-serif text-[1.0625rem] leading-[1.7] text-fg antialiased;
+    font-optical-sizing: auto;
+    caret-color: var(--c-accent);
   }
-  h1, h2, h3, h4 {
-    @apply font-sans text-text;
+  ::selection {
+    background: var(--c-selection);
+    color: var(--c-strong);
   }
+  h1, h2, h3, h4, h5 {
+    @apply text-strong;
+    text-wrap: balance;
+  }
+  p, li, dd { text-wrap: pretty; }
   a {
-    @apply text-blue underline decoration-blue/40 underline-offset-2 hover:decoration-blue;
+    @apply text-accent underline decoration-1 underline-offset-[0.2em];
+    text-decoration-color: color-mix(in oklab, var(--c-accent) 45%, transparent);
+    transition: text-decoration-color 150ms;
   }
+  a:hover { text-decoration-color: var(--c-accent); }
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-lavender;
+    outline: 2px solid var(--c-accent);
+    outline-offset: 3px;
+    border-radius: 3px;
   }
+  table { font-variant-numeric: tabular-nums; }
 }
 
+/* Theme change crossfade. The one motion moment on the page. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 420ms;
+  animation-timing-function: var(--ease-out-expo);
+}
+
+/* Data tables */
+.table-plain { @apply w-full border-collapse font-sans text-[0.9rem] leading-snug; }
+.table-plain th {
+  @apply border-b border-line-strong px-3 py-2.5 text-left align-bottom text-xs font-bold tracking-wide text-muted;
+}
+.table-plain td { @apply border-b border-line px-3 py-3 align-top; }
+.table-plain tbody tr:last-child td { @apply border-b-0; }
+
 /* Long-form narrative text pulled from markdown files */
-.prose-narrative p { @apply my-4; }
-.prose-narrative h3 { @apply mt-8 mb-2 text-lg font-semibold text-mauve; }
-.prose-narrative table { @apply my-6 w-full border-collapse text-sm font-sans; }
-.prose-narrative th { @apply border border-surface1 bg-mantle px-3 py-2 text-left text-subtext1; }
-.prose-narrative td { @apply border border-surface1 px-3 py-2 align-top; }
+.prose-narrative { @apply max-w-[68ch]; }
+.prose-narrative > p { @apply my-5; }
+.prose-narrative > p:first-of-type::first-letter {
+  @apply float-left mt-1.5 mr-2 font-serif text-[3.4rem] leading-[0.8] font-semibold text-accent;
+}
+.prose-narrative h3 { @apply mt-12 mb-3 font-serif text-[1.35rem] font-semibold leading-snug; }
+.prose-narrative table { @apply my-8 w-full border-collapse font-sans text-[0.9rem] leading-snug; }
+.prose-narrative th { @apply border-b border-line-strong px-3 py-2.5 text-left text-xs font-bold tracking-wide text-muted; }
+.prose-narrative td { @apply border-b border-line px-3 py-3 align-top; }
+.prose-narrative td:first-child { @apply font-semibold text-orange; }

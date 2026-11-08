@@ -12,56 +12,80 @@ const src = map ? base + map.image : '';
 
 const quadrants = map
   ? [
-      { name: 'Says', items: map.says, kind: 'stated', color: 'text-blue' },
-      { name: 'Does', items: map.does, kind: 'stated', color: 'text-green' },
-      { name: 'Thinks', items: map.thinks, kind: 'inferred', color: 'text-mauve' },
-      { name: 'Feels', items: map.feels, kind: 'inferred', color: 'text-peach' },
+      { name: 'Says', items: map.says, kind: 'Stated', dot: 'bg-blue', text: 'text-blue' },
+      { name: 'Thinks', items: map.thinks, kind: 'Inferred', dot: 'bg-magenta', text: 'text-magenta' },
+      { name: 'Does', items: map.does, kind: 'Stated', dot: 'bg-green', text: 'text-green' },
+      { name: 'Feels', items: map.feels, kind: 'Inferred', dot: 'bg-orange', text: 'text-orange' },
     ]
   : [];
 ---
 
 {
   map ? (
-    <figure class="space-y-4">
-      <a href={src} class="block" title="Open full-size image">
+    <figure>
+      <a
+        href={src}
+        class="group block overflow-hidden rounded-lg border border-line bg-white p-2 shadow-[0_8px_24px_-12px_rgb(0_0_0/0.35)]"
+      >
         <img
           src={src}
           alt={map.imageAlt}
           loading="lazy"
-          class="w-full rounded-lg border border-surface1 bg-white"
+          decoding="async"
+          class="w-full rounded transition-transform duration-500 ease-out-expo group-hover:scale-[1.01]"
         />
+        <span class="sr-only">Open full-size image</span>
       </a>
-      <figcaption class="font-sans text-xs text-subtext0">
-        Empathy map for {label}, made by {researcher}. Participant names on the map have been covered with the
-        P-label. Click the image to open it full size.
+      <figcaption class="mt-2.5 font-sans text-xs text-muted">
+        Empathy map for {label}, made by {researcher}. Names on the map are covered with the P-label. Select the image
+        to open it full size.
       </figcaption>
-      <div class="grid gap-3 sm:grid-cols-2">
-        {quadrants.map((q) => (
-          <section class="rounded-lg border border-surface0 bg-mantle p-4">
-            <h5 class="flex items-baseline justify-between gap-2 font-sans">
-              <span class:list={['font-semibold', q.color]}>{q.name}</span>
-              <span class="rounded bg-surface0 px-2 py-0.5 text-[0.7rem] text-subtext1">
-                {q.kind === 'stated' ? 'Stated / observed' : 'Inferred by our team'}
-              </span>
+
+      <div class="mt-6 grid overflow-hidden rounded-lg border border-line sm:grid-cols-2">
+        {quadrants.map((q, i) => (
+          <section
+            class:list={[
+              'bg-sunken p-4 sm:p-5',
+              i % 2 === 0 && 'sm:border-r sm:border-line',
+              i < 2 && 'sm:border-b sm:border-line',
+              i > 0 && 'border-t border-line sm:border-t-0',
+            ]}
+          >
+            <h5 class="flex items-center gap-2 font-sans text-sm">
+              <span class:list={['size-2 rounded-full', q.dot]} aria-hidden="true" />
+              <span class:list={['font-bold', q.text]}>{q.name}</span>
+              <span class="ml-auto text-xs text-muted">{q.kind}</span>
             </h5>
-            <ul class="mt-2 list-disc space-y-1 pl-5 text-sm">
-              {q.items.map((i) => (
-                <li>{i}</li>
+            <ul class="mt-3 space-y-2 text-[0.95rem] leading-snug">
+              {q.items.map((item) => (
+                <li class="pl-4 -indent-4">
+                  <span class="text-muted" aria-hidden="true">
+                    –{' '}
+                  </span>
+                  {item}
+                </li>
               ))}
             </ul>
           </section>
         ))}
       </div>
-      <p class="font-sans text-xs text-subtext0">
-        <strong class="text-subtext1">Says</strong> and <strong class="text-subtext1">Does</strong> come from what
-        the participant told us. <strong class="text-subtext1">Thinks</strong> and
-        <strong class="text-subtext1">Feels</strong> are our team’s interpretation.
+      <p class="mt-3 font-sans text-xs text-muted">
+        <span class="font-bold text-soft">Stated</span> quadrants come from what the participant told us.{' '}
+        <span class="font-bold text-soft">Inferred</span> quadrants are our team’s interpretation.
       </p>
     </figure>
   ) : (
-    <div class="rounded-lg border border-dashed border-yellow/60 bg-mantle p-4 font-sans text-sm text-subtext1">
-      <p class="font-semibold text-yellow">Empathy map in progress</p>
-      <p class="mt-1">{researcher} is finishing the empathy map for {label}. It will be added here.</p>
+    <div class="flex gap-3 rounded-lg border border-dashed border-line-strong bg-sunken p-4 font-sans text-sm">
+      <svg class="mt-0.5 size-4 shrink-0 text-yellow" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.5" />
+        <path d="M8 4.75V8l2 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      </svg>
+      <div>
+        <p class="font-bold text-strong">Empathy map in progress</p>
+        <p class="mt-0.5 text-soft">
+          {researcher} is finishing the empathy map for {label}. It will be added here.
+        </p>
+      </div>
     </div>
   )
 }

@@ -6,10 +6,13 @@ import EmpathyMap from '../components/EmpathyMap.astro';
 import { interviews } from '../data/interviews';
 import { columns, original, updated, feedbackResponses, alignment } from '../data/plan';
 import { evidence, references } from '../data/evidence';
+import themes from '../data/themes.json';
 import { Content as Synthesis } from '../content/synthesis.md';
 import { Content as EvidenceAnalysis } from '../content/evidence-analysis.md';
 
 const team = ['Emma Waggenspack', 'Ella Black', 'Anastasia Coffman', 'Janice Lo', 'Channing Brown'];
+const base = import.meta.env.BASE_URL;
+const themeIds = themes.map((t) => t.id);
 
 const toc = [
   { id: 'top', title: 'Wicked Problem & Team' },
@@ -28,7 +31,7 @@ const toc = [
     title: 'Part 2: Interviews',
     children: [
       { id: 'guide', title: '2A. Interview guide' },
-      ...interviews.map((i) => ({ id: i.id, title: `${i.label}: ${i.researcher}` })),
+      ...interviews.map((i) => ({ id: i.id, title: `${i.label} · ${i.researcher}` })),
       { id: 'synthesis', title: '2D. Synthesis narrative' },
     ],
   },
@@ -44,13 +47,25 @@ const toc = [
 ];
 
 const italics = (s: string) => s.replace(/\*(.+?)\*/g, '<em>$1</em>');
+const h2 = 'font-serif text-[2rem] leading-[1.15] font-semibold sm:text-[2.5rem]';
+const h3 = 'font-serif text-[1.6rem] leading-tight font-semibold';
+const h4 = 'font-sans text-[0.8rem] font-bold tracking-wide text-muted';
 ---
 
-<html lang="en">
+<html lang="en" data-theme="catppuccin">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <script is:inline define:vars={{ themeIds }}>
+      // A ?theme= link wins, then the visitor's saved choice. Unknown ids are ignored.
+      let t = new URLSearchParams(location.search).get('theme');
+      try {
+        if (themeIds.includes(t)) localStorage.setItem('portfolio-theme', t);
+        else t = localStorage.getItem('portfolio-theme');
+      } catch {}
+      if (themeIds.includes(t)) document.documentElement.dataset.theme = t;
+    </script>
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <title>Women in Engineering at UTK | Ethnography Portfolio</title>
     <meta
       name="description"
@@ -59,78 +74,97 @@ const italics = (s: string) => s.replace(/\*(.+?)\*/g, '<em>$1</em>');
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..600&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
     <a
       href="#main"
-      class="sr-only z-50 rounded bg-peach px-3 py-2 font-sans text-crust no-underline focus:not-sr-only focus:fixed focus:top-2 focus:left-2"
+      class="sr-only z-50 rounded-md bg-accent px-3 py-2 font-sans text-bg no-underline focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
       >Skip to content</a
     >
-    <div class="lg:grid lg:grid-cols-[17rem_minmax(0,1fr)]">
-      <aside class="sticky top-0 z-20 lg:h-screen lg:self-start">
+    <div class="lg:grid lg:grid-cols-[17.5rem_minmax(0,1fr)]">
+      <aside class="sticky top-0 z-30 lg:h-screen lg:self-start">
         <Toc client:load items={toc} />
       </aside>
 
-      <main id="main" class="mx-auto w-full max-w-4xl px-4 pb-24 sm:px-8">
+      <main id="main" class="mx-auto w-full max-w-[60rem] px-5 pb-28 sm:px-10 lg:px-14">
         <!-- Title area -->
-        <header id="top" class="border-b border-surface0 pt-10 pb-10 lg:pt-16">
-          <p class="font-sans text-sm text-subtext0">UNHO 207 · Ethnographic Evidence &amp; Sensemaking Portfolio</p>
-          <h1 class="mt-3 text-3xl leading-tight font-bold sm:text-4xl">Women in Engineering at UTK</h1>
-          <p class="mt-2 font-sans text-lg text-peach">UN Sustainable Development Goal 5: Gender Equality</p>
+        <header id="top" class="pt-12 pb-14 sm:pt-20">
+          <h1 class="font-serif text-[2.6rem] leading-[1.05] font-semibold tracking-[-0.02em] sm:text-[3.75rem]">
+            Women in Engineering at UTK
+          </h1>
+          <p class="mt-4 max-w-[40ch] font-serif text-xl leading-snug text-soft italic sm:text-2xl">
+            An ethnographic evidence and sensemaking portfolio
+          </p>
 
-          <div class="mt-6 space-y-4">
-            <p>
+          <dl class="mt-10 grid gap-x-8 gap-y-1 border-y border-line py-6 font-sans text-sm sm:grid-cols-[auto_1fr] sm:gap-y-5 [&>dt:not(:first-child)]:mt-4 sm:[&>dt:not(:first-child)]:mt-0">
+            <dt class="font-bold text-muted">Wicked problem</dt>
+            <dd class="text-strong">UN Sustainable Development Goal 5: Gender Equality</dd>
+            <dt class="font-bold text-muted">Team</dt>
+            <dd>
+              <span class="font-bold text-strong">Three is a Magic Number</span>
+              <ul class="mt-1.5 flex flex-wrap gap-x-1 text-fg">
+                {team.map((m, i) => <li>{m}{i < team.length - 1 && <span class="text-muted">,</span>}</li>)}
+              </ul>
+            </dd>
+            <dt class="font-bold text-muted">Course</dt>
+            <dd class="text-fg">UNHO 207, Problem Solving &amp; Human-Centered Design · University of Tennessee, Knoxville</dd>
+          </dl>
+
+          <div class="mt-10 max-w-[68ch] space-y-5">
+            <p class="text-[1.15rem] leading-[1.65]">
               Our wicked problem is gender equality in engineering. Women are still a minority in engineering
               classrooms and on engineering faculty. At UT’s Tickle College of Engineering, women are about 25% of
               undergraduates. We wanted to understand what makes it harder for women to stay in engineering at UTK,
               and whether seeing women teach engineering changes how students think about who belongs.
             </p>
-            <p>Our two research questions are:</p>
-            <ol class="list-decimal space-y-1 pl-6">
-              <li>
-                How do the biases against women in engineering contribute to the retention of women in the
-                engineering program at UTK?
+            <p class="font-sans text-sm font-bold text-muted">Our research questions</p>
+            <ol class="space-y-4">
+              <li class="grid grid-cols-[2.25rem_1fr] items-baseline">
+                <span class="font-serif text-2xl font-semibold text-accent">1</span>
+                <span class="font-serif text-lg leading-snug text-strong">
+                  How do the biases against women in engineering contribute to the retention of women in the
+                  engineering program at UTK?
+                </span>
               </li>
-              <li>How does seeing female engineering faculty impact gender roles in engineering?</li>
+              <li class="grid grid-cols-[2.25rem_1fr] items-baseline">
+                <span class="font-serif text-2xl font-semibold text-accent">2</span>
+                <span class="font-serif text-lg leading-snug text-strong">
+                  How does seeing female engineering faculty impact gender roles in engineering?
+                </span>
+              </li>
             </ol>
-          </div>
-
-          <div class="mt-8 rounded-lg border border-surface0 bg-mantle p-4 font-sans">
-            <h2 class="text-sm font-semibold text-subtext1">Team: Three is a Magic Number</h2>
-            <ul class="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-text">
-              {team.map((m) => <li>{m}</li>)}
-            </ul>
           </div>
         </header>
 
         <!-- PART 1 -->
-        <section id="part-1" class="pt-12" aria-labelledby="part-1-h">
-          <p class="font-sans text-sm font-semibold tracking-wide text-peach uppercase">Part 1</p>
-          <h2 id="part-1-h" class="text-2xl font-bold">Updated Conceptual Research Plan</h2>
-          <p class="mt-3">
+        <section id="part-1" class="border-t border-line-strong pt-14" aria-labelledby="part-1-h">
+          <h2 id="part-1-h" class={h2}>
+            <span class="text-accent">Part 1.</span> Updated Conceptual Research Plan
+          </h2>
+          <p class="mt-4 max-w-[68ch]">
             This is our conceptual research plan after Dr. Mac’s feedback and after we finished our fieldwork. We
             changed it to match the methods we actually used: ethnographic interviews and artifact and document
             collection.
           </p>
 
-          <h3 id="feedback" class="mt-10 text-xl font-semibold text-mauve">How we responded to feedback</h3>
-          <div class="mt-4 overflow-x-auto">
-            <table class="w-full border-collapse font-sans text-sm">
+          <h3 id="feedback" class:list={[h3, 'mt-14']}>How we responded to feedback</h3>
+          <div class="mt-5 overflow-x-auto">
+            <table class="table-plain">
               <thead>
                 <tr>
-                  <th scope="col" class="w-2/5 border border-surface1 bg-mantle px-3 py-2 text-left text-subtext1">Feedback</th>
-                  <th scope="col" class="border border-surface1 bg-mantle px-3 py-2 text-left text-subtext1">What we changed</th>
+                  <th scope="col" class="w-[38%]">Dr. Mac’s feedback</th>
+                  <th scope="col">What we changed</th>
                 </tr>
               </thead>
               <tbody>
                 {
                   feedbackResponses.map((f) => (
                     <tr>
-                      <td class="border border-surface1 px-3 py-2 align-top text-subtext1">{f.feedback}</td>
-                      <td class="border border-surface1 px-3 py-2 align-top">{f.response}</td>
+                      <td class="text-soft">{f.feedback}</td>
+                      <td class="text-fg">{f.response}</td>
                     </tr>
                   ))
                 }
@@ -138,22 +172,22 @@ const italics = (s: string) => s.replace(/\*(.+?)\*/g, '<em>$1</em>');
             </table>
           </div>
 
-          <h3 id="updated-plan" class="mt-10 text-xl font-semibold text-mauve">Updated plan</h3>
-          <p class="mt-2 font-sans text-sm text-subtext0">
-            Each card answers the same ten planning questions for one of our research questions.
+          <h3 id="updated-plan" class:list={[h3, 'mt-14']}>Updated plan</h3>
+          <p class="mt-2 max-w-[68ch] font-sans text-sm text-muted">
+            Each column answers the same ten planning questions for one of our research questions.
           </p>
-          <div class="mt-4 grid gap-6 xl:grid-cols-2">
+          <div class="mt-6 grid gap-6 xl:grid-cols-2">
             {
               updated.map((row, r) => (
-                <article class="rounded-lg border border-surface0 bg-mantle">
-                  <h4 class="border-b border-surface0 px-4 py-3 font-sans font-semibold text-text">
-                    <span class="text-peach">RQ{r + 1}.</span> {row[0]}
+                <article class="overflow-hidden rounded-lg border border-line bg-sunken">
+                  <h4 class="border-b border-line bg-raised px-5 py-4 font-serif text-lg leading-snug font-semibold">
+                    <span class="mr-1 text-accent">RQ{r + 1}.</span> {row[0]}
                   </h4>
-                  <dl class="divide-y divide-surface0 text-sm">
+                  <dl class="divide-y divide-line">
                     {columns.slice(1).map((c, i) => (
-                      <div class="px-4 py-3">
-                        <dt class="font-sans text-xs font-semibold text-subtext0">{c}</dt>
-                        <dd class="mt-1">{row[i + 1]}</dd>
+                      <div class="px-5 py-3.5">
+                        <dt class="font-sans text-xs font-bold text-muted">{c}</dt>
+                        <dd class="mt-1 text-[0.95rem] leading-relaxed">{row[i + 1]}</dd>
                       </div>
                     ))}
                   </dl>
@@ -162,26 +196,31 @@ const italics = (s: string) => s.replace(/\*(.+?)\*/g, '<em>$1</em>');
             }
           </div>
 
-          <h3 id="alignment" class="mt-10 text-xl font-semibold text-mauve">How our questions, methods, and evidence line up</h3>
-          <div class="mt-4 overflow-x-auto">
-            <table class="w-full border-collapse font-sans text-sm">
+          <h3 id="alignment" class:list={[h3, 'mt-14']}>How our questions, methods, and evidence line up</h3>
+          <div class="mt-5 overflow-x-auto">
+            <table class="table-plain">
               <thead>
                 <tr>
-                  <th scope="col" class="border border-surface1 bg-mantle px-3 py-2 text-left text-subtext1">Research question</th>
-                  <th scope="col" class="border border-surface1 bg-mantle px-3 py-2 text-left text-subtext1">Method</th>
-                  <th scope="col" class="border border-surface1 bg-mantle px-3 py-2 text-left text-subtext1">Evidence we found</th>
+                  <th scope="col">Research question</th>
+                  <th scope="col">Method</th>
+                  <th scope="col">Evidence we found</th>
                 </tr>
               </thead>
               <tbody>
                 {
                   alignment.map((a) => (
                     <tr>
-                      <td class="border border-surface1 px-3 py-2 align-top whitespace-nowrap">{a.rq}</td>
-                      <td class="border border-surface1 px-3 py-2 align-top">{a.method}</td>
-                      <td class="border border-surface1 px-3 py-2 align-top">
-                        <ul class="list-disc space-y-1 pl-4">
+                      <td class="font-bold whitespace-nowrap text-strong">{a.rq.split(':')[0]}</td>
+                      <td class="text-soft">{a.method}</td>
+                      <td>
+                        <ul class="space-y-1.5">
                           {a.evidence.map((e) => (
-                            <li>{e}</li>
+                            <li class="pl-3.5 -indent-3.5">
+                              <span class="text-muted" aria-hidden="true">
+                                –{' '}
+                              </span>
+                              {e}
+                            </li>
                           ))}
                         </ul>
                       </td>
@@ -191,15 +230,21 @@ const italics = (s: string) => s.replace(/\*(.+?)\*/g, '<em>$1</em>');
               </tbody>
             </table>
           </div>
+          <p class="mt-3 font-sans text-xs text-muted">
+            RQ1 is about bias and retention. RQ2 is about female faculty and gender roles.
+          </p>
 
-          <h3 id="original-plan" class="mt-10 text-xl font-semibold text-mauve">Original plan (as first submitted)</h3>
-          <p class="mt-2 font-sans text-sm text-subtext0">We kept the original plan for comparison. On a small screen, scroll sideways to see every column.</p>
-          <div class="mt-4 overflow-x-auto rounded-lg border border-surface0">
-            <table class="min-w-[64rem] border-collapse font-sans text-xs">
+          <h3 id="original-plan" class:list={[h3, 'mt-14']}>Original plan</h3>
+          <p class="mt-2 max-w-[68ch] font-sans text-sm text-muted">
+            We kept the original plan, as first submitted, for comparison. On a small screen, scroll sideways to see
+            every column.
+          </p>
+          <div class="mt-5 overflow-x-auto rounded-lg border border-line bg-sunken">
+            <table class="table-plain min-w-[64rem] text-xs">
               <thead>
                 <tr>
                   {columns.map((c) => (
-                    <th scope="col" class="border border-surface1 bg-mantle px-2 py-2 text-left align-top text-subtext1">{c}</th>
+                    <th scope="col" class="bg-raised">{c}</th>
                   ))}
                 </tr>
               </thead>
@@ -208,7 +253,7 @@ const italics = (s: string) => s.replace(/\*(.+?)\*/g, '<em>$1</em>');
                   original.map((row) => (
                     <tr>
                       {row.map((cell) => (
-                        <td class="border border-surface1 px-2 py-2 align-top">{cell}</td>
+                        <td>{cell}</td>
                       ))}
                     </tr>
                   ))
@@ -219,31 +264,45 @@ const italics = (s: string) => s.replace(/\*(.+?)\*/g, '<em>$1</em>');
         </section>
 
         <!-- PART 2 -->
-        <section id="part-2" class="mt-16 border-t border-surface0 pt-12" aria-labelledby="part-2-h">
-          <p class="font-sans text-sm font-semibold tracking-wide text-peach uppercase">Part 2</p>
-          <h2 id="part-2-h" class="text-2xl font-bold">Ethnographic Interviews and Sensemaking</h2>
-          <p class="mt-3">
+        <section id="part-2" class="mt-24 border-t border-line-strong pt-14" aria-labelledby="part-2-h">
+          <h2 id="part-2-h" class={h2}>
+            <span class="text-accent">Part 2.</span> Ethnographic Interviews and Sensemaking
+          </h2>
+          <p class="mt-4 max-w-[68ch]">
             We interviewed five people. Each team member led one interview. To protect participants’ privacy, we call
             them P1 through P5 and removed their names from transcripts and empathy maps.
           </p>
 
-          <h3 id="guide" class="mt-10 text-xl font-semibold text-mauve">2A. Interview Guide</h3>
-          <p class="mt-2">
+          <ol class="mt-8 grid gap-px overflow-hidden rounded-lg border border-line bg-line font-sans text-sm sm:grid-cols-5">
+            {
+              interviews.map((iv) => (
+                <li class="bg-sunken">
+                  <a href={`#${iv.id}`} class="block h-full px-4 py-3.5 no-underline transition-colors hover:bg-raised">
+                    <span class="block font-serif text-2xl font-semibold text-orange">{iv.label}</span>
+                    <span class="mt-1 block leading-snug text-soft">{iv.researcher}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+
+          <h3 id="guide" class:list={[h3, 'mt-16']}>2A. Interview Guide</h3>
+          <p class="mt-3 max-w-[68ch]">
             This is the interview guide our team used. Each researcher’s actual questions are listed with their
             interview below.
           </p>
-          <div class="mt-4 space-y-5 rounded-lg border border-surface0 bg-mantle p-5 text-sm">
+          <div class="mt-6 grid gap-x-10 gap-y-8 rounded-lg border border-line bg-sunken p-5 sm:p-7 md:grid-cols-2">
             <div>
-              <h4 class="font-sans font-semibold text-text">Interview purpose</h4>
-              <p class="mt-1">
+              <h4 class={h4}>Interview purpose</h4>
+              <p class="mt-2 text-[0.95rem]">
                 We want to learn more about engineering faculty’s experiences and how it differs to engineering
                 student’s experiences. We want to primarily focus on women because they are more likely to be aware
                 of the gender gap in the engineering field.
               </p>
             </div>
             <div>
-              <h4 class="font-sans font-semibold text-text">Participant selection</h4>
-              <p class="mt-1">
+              <h4 class={h4}>Participant selection</h4>
+              <p class="mt-2 text-[0.95rem]">
                 We hope to interview someone who has a good amount of knowledge and experience with gender
                 inequality, specifically within the engineering department. Our team plans to interview at least 5
                 people. We hope that many of them are teachers or engineering students that would have stories about
@@ -252,206 +311,199 @@ const italics = (s: string) => s.replace(/\*(.+?)\*/g, '<em>$1</em>');
                 experienced any of this specifically in the engineering field.
               </p>
             </div>
-            <div>
-              <h4 class="font-sans font-semibold text-text">Questions</h4>
-              <dl class="mt-2 space-y-3">
+            <div class="md:col-span-2">
+              <h4 class={h4}>Questions</h4>
+              <div class="mt-3 grid gap-x-10 gap-y-5 text-[0.95rem] md:grid-cols-2">
                 <div>
-                  <dt class="font-sans text-xs font-semibold text-subtext0">A. Opening and rapport-building</dt>
-                  <dd>
-                    <ul class="mt-1 list-disc space-y-1 pl-5">
-                      <li>Tell us about your educational or professional journey in engineering.</li>
-                      <li>What made you interested in this field originally?</li>
-                    </ul>
-                  </dd>
+                  <p class="font-sans text-sm font-bold text-strong">A. Opening and rapport-building</p>
+                  <ul class="mt-1.5 list-disc space-y-1 pl-5 marker:text-muted">
+                    <li>Tell us about your educational or professional journey in engineering.</li>
+                    <li>What made you interested in this field originally?</li>
+                  </ul>
                 </div>
                 <div>
-                  <dt class="font-sans text-xs font-semibold text-subtext0">B. Experience and behavior</dt>
-                  <dd>
-                    <ul class="mt-1 list-disc space-y-1 pl-5">
-                      <li>
-                        What differences, if any, have you observed in student interactions or participation across
-                        different classroom settings?
-                        <ul class="mt-1 list-[circle] pl-5">
-                          <li>Do you think faculty gender plays a role in those differences? If so, how?</li>
-                        </ul>
-                      </li>
-                      <li>How would you describe your experiences teaching and interacting with students in engineering courses?</li>
-                      <li>What patterns have you noticed in how students participate in engineering courses?</li>
-                    </ul>
-                  </dd>
+                  <p class="font-sans text-sm font-bold text-strong">B. Experience and behavior</p>
+                  <ul class="mt-1.5 list-disc space-y-1 pl-5 marker:text-muted">
+                    <li>
+                      What differences, if any, have you observed in student interactions or participation across
+                      different classroom settings?
+                      <ul class="mt-1 list-[circle] pl-5">
+                        <li>Do you think faculty gender plays a role in those differences? If so, how?</li>
+                      </ul>
+                    </li>
+                    <li>How would you describe your experiences teaching and interacting with students in engineering courses?</li>
+                    <li>What patterns have you noticed in how students participate in engineering courses?</li>
+                  </ul>
                 </div>
                 <div>
-                  <dt class="font-sans text-xs font-semibold text-subtext0">C. Challenges, needs, and perspectives</dt>
-                  <dd>
-                    <ul class="mt-1 list-disc space-y-1 pl-5">
-                      <li>What factors have influenced your opportunities for professional growth or advancement in engineering?</li>
-                      <li>How would you describe the role gender has played, if at all, in your interactions with students or colleagues?</li>
-                    </ul>
-                  </dd>
+                  <p class="font-sans text-sm font-bold text-strong">C. Challenges, needs, and perspectives</p>
+                  <ul class="mt-1.5 list-disc space-y-1 pl-5 marker:text-muted">
+                    <li>What factors have influenced your opportunities for professional growth or advancement in engineering?</li>
+                    <li>How would you describe the role gender has played, if at all, in your interactions with students or colleagues?</li>
+                  </ul>
                 </div>
                 <div>
-                  <dt class="font-sans text-xs font-semibold text-subtext0">D. Closing</dt>
-                  <dd>
-                    <ul class="mt-1 list-disc space-y-1 pl-5">
-                      <li>Is there anything else about this experience of yours that would be good for us to know?</li>
-                    </ul>
-                  </dd>
+                  <p class="font-sans text-sm font-bold text-strong">D. Closing</p>
+                  <ul class="mt-1.5 list-disc space-y-1 pl-5 marker:text-muted">
+                    <li>Is there anything else about this experience of yours that would be good for us to know?</li>
+                  </ul>
+                  <p class="mt-4 font-sans text-sm font-bold text-strong">Follow-up prompts</p>
+                  <ul class="mt-1.5 list-disc space-y-1 pl-5 marker:text-muted">
+                    <li>What is a specific example of that experience?</li>
+                    <li>Elaborate on what you mean by that.</li>
+                    <li>Walk me through that experience.</li>
+                    <li>Describe a specific interaction that shaped your perspective.</li>
+                  </ul>
                 </div>
-                <div>
-                  <dt class="font-sans text-xs font-semibold text-subtext0">Follow-up prompts</dt>
-                  <dd>
-                    <ul class="mt-1 list-disc space-y-1 pl-5">
-                      <li>What is a specific example of that experience?</li>
-                      <li>Elaborate on what you mean by that.</li>
-                      <li>Walk me through that experience.</li>
-                      <li>Describe a specific interaction that shaped your perspective.</li>
-                    </ul>
-                  </dd>
-                </div>
-              </dl>
+              </div>
             </div>
-            <div>
-              <h4 class="font-sans font-semibold text-text">Interview procedures</h4>
-              <ul class="mt-1 list-disc space-y-1 pl-5">
-                <li>
-                  <strong>Recruitment and scheduling:</strong> We email prospective interviewees and cc the whole group.
-                  We schedule a time that fits the participant and lets two group members be present.
-                </li>
-                <li>
-                  <strong>Setting:</strong> Hodges Library or another location on campus that the participant prefers.
-                </li>
-                <li>
-                  <strong>Roles:</strong> At least two team members at every interview. One interviewer asks questions
-                  and one recorder records audio for transcription.
-                </li>
-                <li>
-                  <strong>Documentation and ethics:</strong> We obtain informed consent, protect the interviewee’s
-                  confidentiality, and make sure the interview is voluntary. We get consent to record and take
-                  fieldnotes without bias and assumptions.
-                </li>
-              </ul>
+            <div class="md:col-span-2">
+              <h4 class={h4}>Interview procedures</h4>
+              <dl class="mt-3 grid gap-x-6 gap-y-3 text-[0.95rem] sm:grid-cols-[11rem_1fr]">
+                <dt class="font-sans text-sm font-bold text-strong">Recruitment</dt>
+                <dd>
+                  We email prospective interviewees and cc the whole group. We schedule a time that fits the participant
+                  and lets two group members be present.
+                </dd>
+                <dt class="font-sans text-sm font-bold text-strong">Setting</dt>
+                <dd>Hodges Library or another location on campus that the participant prefers.</dd>
+                <dt class="font-sans text-sm font-bold text-strong">Roles</dt>
+                <dd>
+                  At least two team members attend every interview. One interviewer asks questions and one recorder
+                  records audio for transcription.
+                </dd>
+                <dt class="font-sans text-sm font-bold text-strong">Documentation and ethics</dt>
+                <dd>
+                  We obtain informed consent, protect the interviewee’s confidentiality, and make sure the interview is
+                  voluntary. We get consent to record and take fieldnotes without bias and assumptions.
+                </dd>
+              </dl>
             </div>
           </div>
 
           {
             interviews.map((iv) => (
-              <article id={iv.id} class="mt-14 scroll-mt-20" aria-labelledby={`${iv.id}-h`}>
-                <h3 id={`${iv.id}-h`} class="text-xl font-semibold text-mauve">
-                  Interview {iv.label}
-                </h3>
-                <dl class="mt-3 grid gap-x-6 gap-y-2 rounded-lg border border-surface0 bg-mantle p-4 font-sans text-sm sm:grid-cols-[8rem_1fr]">
-                  <dt class="text-subtext0">Participant</dt>
-                  <dd class="font-semibold text-peach">{iv.label}</dd>
-                  <dt class="text-subtext0">Role</dt>
-                  <dd>{iv.role}</dd>
-                  <dt class="text-subtext0">Researcher</dt>
-                  <dd class="font-semibold text-sapphire">{iv.researcher}</dd>
-                  <dt class="text-subtext0">Format</dt>
-                  <dd>{iv.format}</dd>
-                </dl>
+              <article id={iv.id} class="mt-20 border-t border-line pt-10" aria-labelledby={`${iv.id}-h`}>
+                <div class="grid gap-x-8 gap-y-4 sm:grid-cols-[7rem_1fr]">
+                  <h3
+                    id={`${iv.id}-h`}
+                    class="font-serif text-[3.5rem] leading-none font-semibold tracking-[-0.02em] text-orange sm:text-[4.5rem]"
+                  >
+                    <span class="sr-only">Interview </span>
+                    {iv.label}
+                  </h3>
+                  <dl class="grid content-start gap-x-6 gap-y-1.5 font-sans text-sm sm:grid-cols-[6.5rem_1fr]">
+                    <dt class="font-bold text-muted">Participant</dt>
+                    <dd class="text-strong">{iv.role}</dd>
+                    <dt class="font-bold text-muted">Researcher</dt>
+                    <dd class="font-bold text-cyan">{iv.researcher}</dd>
+                    <dt class="font-bold text-muted">Format</dt>
+                    <dd class="text-soft">{iv.format}</dd>
+                  </dl>
+                </div>
 
-                <h4 class="mt-6 font-sans font-semibold">A. Questions {iv.researcher} asked</h4>
-                <ol class="mt-2 list-decimal space-y-1 pl-6 text-sm">
-                  {iv.questions.map((q) => (
-                    <li>{q}</li>
+                <h4 class:list={[h4, 'mt-10']}>A. Questions {iv.researcher.split(' ')[0]} asked</h4>
+                <ol class="mt-3 max-w-[68ch] space-y-1.5 text-[0.95rem]">
+                  {iv.questions.map((q, i) => (
+                    <li class="grid grid-cols-[1.75rem_1fr]">
+                      <span class="font-sans text-sm text-muted tabular-nums">{i + 1}.</span>
+                      <span>{q}</span>
+                    </li>
                   ))}
                 </ol>
 
-                <h4 class="mt-6 mb-2 font-sans font-semibold">B. Transcript</h4>
-                {iv.transcriptNote && <p class="mb-3 font-sans text-xs text-subtext0">{iv.transcriptNote}</p>}
+                <h4 class:list={[h4, 'mt-10 mb-3']}>B. Transcript</h4>
+                {iv.transcriptNote && <p class="mb-3 max-w-[68ch] font-sans text-sm text-muted">{iv.transcriptNote}</p>}
                 <Transcript turns={iv.transcript} interviewer={iv.researcher} participant={iv.label} />
 
-                <h4 class="mt-6 mb-2 font-sans font-semibold">C. Empathy map</h4>
+                <h4 class:list={[h4, 'mt-10 mb-3']}>C. Empathy map</h4>
                 <EmpathyMap map={iv.map} label={iv.label} researcher={iv.researcher} />
               </article>
             ))
           }
 
-          <section id="synthesis" class="mt-16" aria-labelledby="synthesis-h">
-            <h3 id="synthesis-h" class="text-xl font-semibold text-mauve">2D. Interview Synthesis Narrative</h3>
-            <p class="mt-1 font-sans text-sm text-subtext0">This narrative pulls together what we learned from all five interviews.</p>
-            <div class="prose-narrative">
+          <section id="synthesis" class="mt-20 border-t border-line pt-10" aria-labelledby="synthesis-h">
+            <h3 id="synthesis-h" class={h3}>2D. Interview Synthesis Narrative</h3>
+            <p class="mt-2 font-sans text-sm text-muted">
+              This narrative pulls together what we learned from all five interviews.
+            </p>
+            <div class="prose-narrative mt-6">
               <Synthesis />
             </div>
           </section>
         </section>
 
         <!-- PART 3 -->
-        <section id="part-3" class="mt-16 border-t border-surface0 pt-12" aria-labelledby="part-3-h">
-          <p class="font-sans text-sm font-semibold tracking-wide text-peach uppercase">Part 3</p>
-          <h2 id="part-3-h" class="text-2xl font-bold">Additional Method: Artifact and Document Collection</h2>
-          <dl class="mt-4 grid gap-x-6 gap-y-2 rounded-lg border border-surface0 bg-mantle p-4 font-sans text-sm sm:grid-cols-[8rem_1fr]">
-            <dt class="text-subtext0">Researcher</dt>
-            <dd class="font-semibold text-sapphire">Anastasia Coffman</dd>
-            <dt class="text-subtext0">Method</dt>
-            <dd>Artifact and document collection</dd>
-            <dt class="text-subtext0">Setting</dt>
-            <dd>Public UT and Society of Women Engineers websites</dd>
-            <dt class="text-subtext0">Date collected</dt>
-            <dd>November 6, 2026</dd>
+        <section id="part-3" class="mt-24 border-t border-line-strong pt-14" aria-labelledby="part-3-h">
+          <h2 id="part-3-h" class={h2}>
+            <span class="text-accent">Part 3.</span> Artifact and Document Collection
+          </h2>
+          <p class="mt-4 max-w-[68ch]">
+            For our additional ethnographic method, we collected public documents about women in engineering at UT and
+            nationally.
+          </p>
+          <dl class="mt-6 grid gap-x-6 gap-y-1.5 border-y border-line py-5 font-sans text-sm sm:grid-cols-[8rem_1fr]">
+            <dt class="font-bold text-muted">Researcher</dt>
+            <dd class="font-bold text-cyan">Anastasia Coffman</dd>
+            <dt class="font-bold text-muted">Method</dt>
+            <dd class="text-strong">Artifact and document collection</dd>
+            <dt class="font-bold text-muted">Setting</dt>
+            <dd class="text-strong">Public UT and Society of Women Engineers websites</dd>
+            <dt class="font-bold text-muted">Date collected</dt>
+            <dd class="text-strong">November 6, 2026</dd>
           </dl>
 
-          <h3 id="evidence" class="mt-10 text-xl font-semibold text-mauve">3A. Research Evidence</h3>
-          <p class="mt-2">
+          <h3 id="evidence" class:list={[h3, 'mt-14']}>3A. Research Evidence</h3>
+          <p class="mt-3 max-w-[68ch]">
             For our additional method, I collected seven public documents about women in UT’s Tickle College of
             Engineering and about women in engineering faculty nationally. The table below lists each one and what I
             took from it.
           </p>
-          <div class="mt-4 overflow-x-auto">
-            <table class="w-full border-collapse font-sans text-sm">
-              <thead>
-                <tr>
-                  <th scope="col" class="border border-surface1 bg-mantle px-3 py-2 text-left text-subtext1">#</th>
-                  <th scope="col" class="border border-surface1 bg-mantle px-3 py-2 text-left text-subtext1">Artifact</th>
-                  <th scope="col" class="border border-surface1 bg-mantle px-3 py-2 text-left text-subtext1">Source and date</th>
-                  <th scope="col" class="border border-surface1 bg-mantle px-3 py-2 text-left text-subtext1">What it shows</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  evidence.map((e) => (
-                    <tr>
-                      <td class="border border-surface1 px-3 py-2 align-top text-peach">{e.n}</td>
-                      <td class="border border-surface1 px-3 py-2 align-top">
-                        <a href={e.url} target="_blank" rel="noopener">{e.artifact}</a>
-                      </td>
-                      <td class="border border-surface1 px-3 py-2 align-top text-subtext1">{e.source}</td>
-                      <td class="border border-surface1 px-3 py-2 align-top">{e.shows}</td>
-                    </tr>
-                  ))
-                }
-              </tbody>
-            </table>
-          </div>
+          <ol class="mt-6 divide-y divide-line border-y border-line">
+            {
+              evidence.map((e) => (
+                <li class="grid gap-x-6 gap-y-1.5 py-5 sm:grid-cols-[3rem_minmax(0,15rem)_1fr]">
+                  <span class="font-sans text-sm font-bold text-orange">{e.n}</span>
+                  <div>
+                    <a href={e.url} target="_blank" rel="noopener" class="font-serif leading-snug font-semibold">
+                      {e.artifact}
+                    </a>
+                    <p class="mt-1 font-sans text-xs leading-snug text-muted">{e.source}</p>
+                  </div>
+                  <p class="text-[0.95rem] leading-relaxed">{e.shows}</p>
+                </li>
+              ))
+            }
+          </ol>
 
-          <section id="analysis" class="mt-10" aria-labelledby="analysis-h">
-            <h3 id="analysis-h" class="text-xl font-semibold text-mauve">3B. Evidence Analysis Narrative</h3>
-            <div class="prose-narrative">
+          <section id="analysis" class="mt-14" aria-labelledby="analysis-h">
+            <h3 id="analysis-h" class={h3}>3B. Evidence Analysis Narrative</h3>
+            <div class="prose-narrative mt-4">
               <EvidenceAnalysis />
             </div>
           </section>
         </section>
 
         <!-- REFERENCES -->
-        <section id="references" class="mt-16 border-t border-surface0 pt-12" aria-labelledby="references-h">
-          <h2 id="references-h" class="text-2xl font-bold">References</h2>
-          <ul class="mt-4 space-y-3">
+        <section id="references" class="mt-24 border-t border-line-strong pt-14" aria-labelledby="references-h">
+          <h2 id="references-h" class={h2}>References</h2>
+          <ul class="mt-6 max-w-[72ch] space-y-4">
             {
               references.map((r) => (
-                <li class="pl-8 -indent-8 text-sm">
+                <li class="pl-8 -indent-8 text-[0.95rem] leading-relaxed">
                   <Fragment set:html={italics(r.text)} />{' '}
-                  <a href={r.url} target="_blank" rel="noopener" class="break-all">{r.url}</a>
+                  <a href={r.url} target="_blank" rel="noopener" class="break-all">
+                    {r.url}
+                  </a>
                 </li>
               ))
             }
           </ul>
         </section>
 
-        <footer class="mt-20 border-t border-surface0 pt-6 font-sans text-xs text-subtext0">
-          <p>UNHO 207, Problem Solving &amp; Human-Centered Design · University of Tennessee, Knoxville · Fall 2026</p>
-          <p class="mt-1">
-            Participant names are replaced with P1 to P5. Audio recordings are not published.
-          </p>
+        <footer class="mt-24 border-t border-line pt-6 font-sans text-xs leading-relaxed text-muted">
+          <p>Three is a Magic Number · UNHO 207 · University of Tennessee, Knoxville · Fall 2026</p>
+          <p class="mt-1">Participant names are replaced with P1 to P5. Audio recordings are not published.</p>
         </footer>
       </main>
     </div>
