@@ -144,7 +144,33 @@ export const interviews: Interview[] = [
       { note: 'P1 agreed. Our team still chose to use P-labels for every participant.' },
       { s: 'I', t: 'Okay, perfect. Thank you so much. I had a great interview.' },
     ],
-    map: null,
+    map: {
+      image: '/maps/p1-empathy-map.webp',
+      imageAlt:
+        'Empathy map for P1 made by Emma Waggenspack, with four quadrants: Says, Thinks, Does, and Feels. The center refers to the P1 participant, a female engineering professor. The full text is listed below the image.',
+      width: 500,
+      height: 500,
+      says: [
+        '“There was like 25 boys, one girl.”',
+        '“Well, I’ve got a PhD in this. Is that not enough?”',
+        '“There are a lot of female students, but, it is still a minority.”',
+      ],
+      thinks: [
+        'The females in class always tend to stick together',
+        'People shouldn’t be surprised to see a woman in STEM',
+        'Having female teachers benefits female STEM students',
+      ],
+      does: [
+        'Teaches two different engineering courses',
+        'Mediates problems with teams of both genders',
+        'Supports all students who come to her for help, especially female students',
+      ],
+      feels: [
+        'Frustrated that women don’t get the same recognition',
+        'People are biased to expect a male teacher',
+        'Engineering students aren’t very talkative',
+      ],
+    },
   },
   {
     id: 'p2',
